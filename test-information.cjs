@@ -1,0 +1,7 @@
+const assert=require('node:assert/strict');const {sets,evaluate}=require('./dist/conditions');
+let count=0;
+function test(id,changes,state){const s=sets.find(s=>s.id===id);const a=Object.fromEntries(s.fields.map(f=>[f.id,f.type==='bool'?f.expected:f.type==='select'?f.accept[0]:f.type==='date'?'2026-09-08':f.min]));assert.equal(evaluate(s,{...a,...changes}).state,state);count++;}
+for(const id of ['one','two-i','two-ro','two-ha']){test('info-'+id,{},'pass');test('info-'+id,{home:'yes'},'fail');test('info-'+id,{duplicate:'yes'},'fail');test('info-'+id,{residualInfo:'count'},'fail');test('info-'+id,{symptomInfo:'missing'},'fail');test('info-'+id,{consent:''},'unknown');}
+test('info-two-ha',{care:'yes'},'fail');test('info-three',{planned:'no'},'fail');test('info-three',{allDrugs:'no'},'fail');test('discharge-joint',{method:'phone'},'fail');test('discharge-joint',{method:'video'},'pass');test('discharge-joint',{count:'special'},'pass');test('discharge-joint',{count:'over'},'fail');test('discharge-joint',{homeDischarge:'no'},'fail');test('tube-support',{previous:'yes'},'fail');
+for(const [supported,firstVisit,state] of [['2026-08-31','2026-09-01','pass'],['2026-09-01','2026-09-02','pass'],['2026-09-01','2026-09-01','fail'],['2026-07-31','2026-09-01','fail'],['2026-12-31','2027-01-01','pass'],['','2026-09-01','unknown'],['2026-09-02','2026-09-01','fail']])test('home-transition',{supported,firstVisit},state);
+console.log('PASS: '+count+' information / discharge / transition scenarios');
