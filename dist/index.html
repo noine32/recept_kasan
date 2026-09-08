@@ -4,13 +4,33 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>調剤算定リファレンス｜令和8年度</title>
 <meta name="description" content="令和8年度の調剤報酬を略号・項目名・算定条件・具体例から検索。厚生労働省の点数表、留意事項、施設基準、疑義解釈を参照できます。">
-<link rel="stylesheet" href="./style.css"><script src="./app.js" defer></script>
+<link rel="stylesheet" href="./style.css"><script src="./app.js" defer></script><script src="./scenes.js" defer></script>
 </head>
 <body>
 <header><div class="brand"><span class="symbol" aria-hidden="true">Rx</span><div><strong>調剤算定リファレンス</strong><span>令和8年度 · 2026年6月改定</span></div></div><a href="https://github.com/noine32/recept_kasan">GitHub</a></header>
 <main>
+<section class="scene-panel" aria-labelledby="scene-title">
+<div class="eyebrow">行った業務から探す</div><h1 id="scene-title">何をしたときの算定を調べますか？</h1>
+<form id="scene-form"><label for="scene-query">患者さんの状況と、実施したこと</label><div class="search-line"><input id="scene-query" value="" placeholder="例：退院時サマリを使って、病院に服薬状況を情報提供した"><button type="submit">候補を探す</button></div></form>
+<div class="examples"><button id="discharge-example" type="button">退院時サマリを使って病院に情報提供した</button></div>
+<p class="hint">場面検索は現在「退院・入院・病院への情報提供」に対応しています。患者名などの個人情報は入力しないでください。</p>
+<div id="scene-content" hidden>
+<p class="scene-intro">サマリは判断の材料です。算定候補は、<strong>誰の依頼で・いつ・何を実施したか</strong>によって変わります。</p>
+<details open class="scene-questions"><summary>分かる条件を選ぶと、候補を絞れます</summary><div class="question-grid">
+<label>情報提供した時期<select data-answer="timing"><option value="">未確認</option><option value="before">これから入院する前</option><option value="during">入院中・退院する前</option><option value="after">退院後</option></select></label>
+<label>情報提供のきっかけ<select data-answer="request"><option value="">未確認</option><option value="hospital">病院・医療機関からの求め</option><option value="pharmacy">薬剤師が必要と判断</option></select></label>
+<label>今回実施した業務<select data-answer="action"><option value="">未確認</option><option value="report">服薬状況を評価して文書で報告のみ</option><option value="joint">入院中に病院職員と共同で患者等に指導</option><option value="visit">計画的な在宅訪問の開始前に、別日に患家へ訪問して管理・支援</option><option value="follow">調剤後の別日に電話等で確認・指導し報告</option></select></label>
+<label>患者の同意<select data-answer="consent"><option value="">未確認</option><option value="yes">取得済み</option><option value="no">取得していない</option></select></label>
+<label>在宅の算定状況<select data-answer="home"><option value="">未確認</option><option value="none">在宅の指導料等は算定していない</option><option value="medical">在宅患者訪問薬剤管理指導料を算定</option><option value="care">居宅療養管理指導費等を算定</option></select></label>
+<label>治療の状況<select data-answer="disease"><option value="">未確認</option><option value="diabetes">糖尿病薬の新規処方・用法用量変更</option><option value="heart">心疾患の入院歴がある慢性心不全</option><option value="other">いずれにも該当しない</option></select></label>
+</div></details>
+<div id="scene-status" role="status" aria-live="polite"></div><div id="scene-results"></div>
+<details id="scene-alternatives"><summary>別の業務・条件なら確認する候補</summary><div id="scene-other"></div></details>
+<p class="hint">表示は算定候補であり、算定確定ではありません。回数制限、届出、特別調剤基本料、在宅・介護との給付調整、同じ情報提供への重複算定を原文で確認してください。</p>
+</div><p id="scene-message" role="status"></p>
+</section>
 <section class="search-panel" aria-labelledby="search-title">
-<div class="eyebrow">調剤報酬を、根拠まで調べる</div><h1 id="search-title">どの条件で算定できる？</h1>
+<div class="eyebrow">項目名やキーワードが分かる場合</div><h2 id="search-title">項目・公式資料を検索</h2>
 <form id="search-form" role="search"><label for="query">略号・項目名・制御コード・算定条件</label><div class="search-line"><input id="query" type="search" placeholder="例：残薬 6日 ／ 吸入 インフルエンザ ／ 調残A" autocomplete="off"><button type="submit">検索</button></div></form>
 <div class="examples"><span>よく調べる条件</span><button data-query="残薬">残薬調整</button><button data-query="一包化">一包化</button><button data-query="吸入">吸入指導</button><button data-query="在宅">在宅</button><button data-query="併算定">併算定</button></div>
 <p class="hint">空白で複数語を指定すると、すべての語を含む結果を表示します。全角・半角に対応。</p>
