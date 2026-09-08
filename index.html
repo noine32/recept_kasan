@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>調剤算定リファレンス｜令和8年度</title>
+<meta name="description" content="令和8年度の調剤報酬を略号・項目名・算定条件・具体例から検索。厚生労働省の点数表、留意事項、施設基準、疑義解釈を参照できます。">
+<link rel="stylesheet" href="./style.css"><script src="./app.js" defer></script>
+</head>
+<body>
+<header><div class="brand"><span class="symbol" aria-hidden="true">Rx</span><div><strong>調剤算定リファレンス</strong><span>令和8年度 · 2026年6月改定</span></div></div><a href="https://github.com/noine32/recept_kasan">GitHub</a></header>
+<main>
+<section class="search-panel" aria-labelledby="search-title">
+<div class="eyebrow">調剤報酬を、根拠まで調べる</div><h1 id="search-title">どの条件で算定できる？</h1>
+<form id="search-form" role="search"><label for="query">略号・項目名・制御コード・算定条件</label><div class="search-line"><input id="query" type="search" placeholder="例：残薬 6日 ／ 吸入 インフルエンザ ／ 調残A" autocomplete="off"><button type="submit">検索</button></div></form>
+<div class="examples"><span>よく調べる条件</span><button data-query="残薬">残薬調整</button><button data-query="一包化">一包化</button><button data-query="吸入">吸入指導</button><button data-query="在宅">在宅</button><button data-query="併算定">併算定</button></div>
+<p class="hint">空白で複数語を指定すると、すべての語を含む結果を表示します。全角・半角に対応。</p>
+</section>
+<aside class="update"><strong>開始日に注意</strong><span>服用薬剤調整支援料2（1,000点）は、令和9年6月1日から。令和8年6月〜令和9年5月は算定できません。</span><a href="https://www.mhlw.go.jp/content/12400000/001713883.pdf#page=43" target="_blank" rel="noopener">根拠</a></aside>
+<div class="workspace">
+<aside class="sidebar"><h2>検索対象</h2><nav id="modes" aria-label="検索対象"><button data-mode="items" class="selected" aria-pressed="true">項目・略号 <span id="n-items">—</span></button><button data-mode="cases" aria-pressed="false">算定パターン <span id="n-cases">—</span></button><button data-mode="rules" aria-pressed="false">留意事項・全項目 <span id="n-rules">—</span></button><button data-mode="pages" aria-pressed="false">公式資料の全文検索 <span id="n-pages">—</span></button></nav>
+<label for="category">絞り込み</label><select id="category"><option value="">すべて</option></select>
+<details class="coverage"><summary>収録範囲と確認状況</summary><p id="coverage"></p><p>元表の略号・制御コードは全件照合未完了です。元表の短い説明・点数だけで算定を判断せず、該当する通知・施設基準・疑義解釈をご確認ください。</p><p>事例は条文を基に整理した解説です。個々の事例で共通要件を満たす必要があります。通知の表組みはPDFで確認してください。</p><p>資料確認日：2026年9月8日</p></details>
+<details><summary>出典一覧</summary><div id="sources"></div></details>
+</aside>
+<section class="results" aria-label="検索結果"><div class="result-heading"><h2 id="mode-title">項目・略号</h2><span id="count" role="status" aria-live="polite">読み込み中…</span></div><p id="mode-help" class="hint"></p><div id="results"></div><button id="more" hidden>さらに表示</button></section>
+</div>
+<noscript>検索にはJavaScriptが必要です。<a href="https://www.mhlw.go.jp/stf/newpage_67729.html">厚生労働省の資料一覧</a>から原文をご覧ください。</noscript>
+</main><footer>厚生労働省の公表資料を基にした非公式の検索資料。訂正や個別の審査判断は原資料・照会先で確認してください。</footer>
+</body></html>
