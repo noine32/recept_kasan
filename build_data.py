@@ -47,7 +47,7 @@ for i,m in enumerate(manifest):
             if not active and not any(k in norm(txt) for k in ['保険薬局','調剤ベースアップ','調剤基本料']): continue
         text = clean(txt)
         headings = re.findall(r'【([^】]+)】',text)
-        title = '・'.join(dict.fromkeys(headings)) or next((x.strip() for x in text.splitlines() if len(x.strip())>5),m['title'])[:90]
+        title = f"{m['title']} ／ PDF {p}ページ"
         pages.append({'id':f'{file}-p{p}','doc':file,'page':p,'title':title,'text':text,'kind':kind,'url':m['url']+f'#page={p}'})
         doc['pages'] += 1
 
