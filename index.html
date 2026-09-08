@@ -4,7 +4,7 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>調剤算定リファレンス｜令和8年度</title>
 <meta name="description" content="令和8年度の調剤報酬を略号・項目名・算定条件・具体例から検索。厚生労働省の点数表、留意事項、施設基準、疑義解釈を参照できます。">
-<link rel="stylesheet" href="./style.css"><script src="./app.js" defer></script><script src="./scenes.js" defer></script>
+<link rel="stylesheet" href="./style.css"><script src="./app.js" defer></script><script src="./scenes.js" defer></script><script src="./workflows.js" defer></script>
 </head>
 <body>
 <header><div class="brand"><span class="symbol" aria-hidden="true">Rx</span><div><strong>調剤算定リファレンス</strong><span>令和8年度 · 2026年6月改定</span></div></div><a href="https://github.com/noine32/recept_kasan">GitHub</a></header>
@@ -13,7 +13,9 @@
 <div class="eyebrow">行った業務から探す</div><h1 id="scene-title">何をしたときの算定を調べますか？</h1>
 <form id="scene-form"><label for="scene-query">患者さんの状況と、実施したこと</label><div class="search-line"><input id="scene-query" value="" placeholder="例：退院時サマリを使って、病院に服薬状況を情報提供した"><button type="submit">候補を探す</button></div></form>
 <div class="examples"><button id="discharge-example" type="button">退院時サマリを使って病院に情報提供した</button></div>
-<p class="hint">場面検索は現在「退院・入院・病院への情報提供」に対応しています。患者名などの個人情報は入力しないでください。</p>
+<div id="workflow-menu" class="examples" aria-label="業務から選ぶ"></div>
+<p class="hint">業務を文章で入力するか、場面を選んでください。複数の業務が含まれる場合は、それぞれの候補を確認できます。患者名などの個人情報は入力しないでください。</p>
+<section id="workflow-content" hidden aria-label="業務から見つかった算定候補"></section>
 <div id="scene-content" hidden>
 <p class="scene-intro">サマリは判断の材料です。算定候補は、<strong>誰の依頼で・いつ・何を実施したか</strong>によって変わります。</p>
 <details open class="scene-questions"><summary>分かる条件を選ぶと、候補を絞れます</summary><div class="question-grid">
