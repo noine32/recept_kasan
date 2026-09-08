@@ -6,7 +6,7 @@ let data,mode='items',limit=25,query='',category='';
 const labels={items:'項目・略号',cases:'算定パターン',rules:'留意事項・全項目',pages:'公式資料の全文検索'};
 const helps={items:'添付表の全行を掲載。同じ略号も算定する本体が違う場合は別項目として表示します。',cases:'条文から整理した具体例です。「対象」は、記載した条件に加え、その項目の共通要件を満たす場合です。全事例の網羅は未完了です。',rules:'調剤の留意事項を項目ごとに収録。例外・回数制限・記録要件を省略せず確認できます。',pages:'点数表・留意事項・疑義解釈その1〜12などをページ単位で検索。文が次ページに続く場合と表組みは原PDFで確認してください。'};
 function link(url,text='厚生労働省の原文を開く'){return `<a class="source-link" href="${esc(url)}" target="_blank" rel="noopener">${esc(text)}</a>`;}
-function bodyText(t){return `<div class="source-text">${esc(t)}</div>`;}
+function bodyText(t){return window.SourceText.render(t);}
 function tokens(){return query.normalize('NFKC').trim().split(/\s+/).filter(Boolean).map(norm);}
 function relatedRules(x){return x.rules.map(id=>data.rules.find(r=>r.id===id)).filter(Boolean);}
 function searchable(x,m){if(m==='items')return [x.abbr,x.code,x.name,x.division,x.description,x.points,...x.corrections,...relatedRules(x).map(r=>r.text)].join(' ');return [x.title,x.category,x.result,x.parent,x.text,x.kind].join(' ');}
