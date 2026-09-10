@@ -1,0 +1,6 @@
+const assert=require('node:assert/strict'),{sets,evaluate}=require('./dist/conditions');let n=0;
+function test(id,changes,state){const s=sets.find(s=>s.id===id);const a=Object.fromEntries(s.fields.map(f=>[f.id,f.type==='bool'?f.expected:f.type==='select'?f.accept[0]:f.type==='date'?'2026-09-10':f.min]));assert.equal(evaluate(s,{...a,...changes}).state,state,id);n++;}
+for(const id of ['prep-crush','prep-half','prep-mix','split-storage','split-trial','split-doctor','refill-next'])test(id,{},'pass');
+test('prep-crush',{product:'available'},'fail');test('prep-crush',{product:'shortage',summary:''},'unknown');test('prep-crush',{product:'shortage',summary:'yes'},'pass');test('prep-half',{sameStrength:'yes'},'fail');test('prep-mix',{packFee:'yes'},'fail');test('prep-mix',{two:'no'},'fail');test('split-storage',{days:14},'fail');test('split-storage',{days:15},'pass');test('split-trial',{second:'no'},'fail');
+for(const [actual,state]of [['2026-09-03','pass'],['2026-09-17','pass'],['2026-09-02','unknown'],['2026-09-18','unknown'],['','unknown']])test('refill-next',{scheduled:'2026-09-10',actual},state);
+test('refill-next',{prohibited:'yes'},'fail');test('refill-next',{appropriate:'no'},'fail');console.log('PASS: '+n+' dispensing boundary scenarios');
