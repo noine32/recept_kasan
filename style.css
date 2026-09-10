@@ -10,3 +10,5 @@
 .snippet mark{background:#ffdf80;color:#172f40;border-radius:2px;padding:0 1px}.snippet{line-height:1.95}
 
 .coverage-scroll{overflow:auto}.coverage-table{width:100%;border-collapse:collapse;min-width:700px}.coverage-table th,.coverage-table td{padding:12px;border:1px solid var(--line);text-align:left;vertical-align:top}.coverage-table th{background:#eaf2f7}.cross-options{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:8px}.cross-options label{display:flex;align-items:start;gap:8px}.cross-options input{width:20px;flex:none;margin-top:6px}
+
+.billing-labels{margin:12px 0;padding:12px;background:#f4f8f8;border-radius:8px}.billing-label-row{padding:10px 0;border-top:1px solid #dce6e6}.billing-label-row p{margin:5px 0;overflow-wrap:anywhere}.billing-label-row .meta{flex-wrap:wrap}
